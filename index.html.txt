@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dream Lily - Nitika</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(270deg, #e0c3fc, #fcd6e6, #d6f0ff);
+  background-size: 600% 600%;
+  animation: bgMove 20s ease infinite;
+  font-family: 'Great Vibes', cursive;
+}
+
+@keyframes bgMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+/* Sparkles */
+.sparkles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: sparkleMove 30s linear infinite;
+  opacity: 0.5;
+}
+@keyframes sparkleMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(-300px); }
+}
+
+.container {
+  text-align: center;
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* 🌸 3D Lily */
+.flower {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  transform-style: preserve-3d;
+  animation: rotateFlower 10s infinite linear;
+}
+@keyframes rotateFlower {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+.petal {
+  position: absolute;
+  width: 60px;
+  height: 120px;
+  background: radial-gradient(circle at top, #ffd1dc, #ff4d88);
+  border-radius: 50% 50% 0 0;
+  left: 50%;
+  transform-origin: bottom center;
+  box-shadow: 0 10px 20px rgba(255,0,100,0.4);
+}
+.p1 { transform: rotateY(0deg) translateX(-50%); }
+.p2 { transform: rotateY(72deg) translateX(-50%); }
+.p3 { transform: rotateY(144deg) translateX(-50%); }
+.p4 { transform: rotateY(216deg) translateX(-50%); }
+.p5 { transform: rotateY(288deg) translateX(-50%); }
+
+.center-dot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: gold;
+  border-radius: 50%;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Name */
+.name {
+  margin-top: 20px;
+  font-size: 50px;
+  color: #ff4d88;
+  opacity: 0;
+  transform: translateY(40px);
+  text-shadow: 0 0 20px #ff99cc;
+  animation: reveal 2s ease 2s forwards;
+}
+@keyframes reveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Question */
+.question {
+  margin-top: 15px;
+  font-size: 22px;
+  color: white;
+  opacity: 0;
+  animation: reveal 2s ease 3s forwards;
+}
+
+/* Buttons */
+.buttons {
+  margin-top: 10px;
+  opacity: 0;
+  animation: reveal 2s ease 3.5s forwards;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.yes {
+  background: pink;
+  box-shadow: 0 0 15px pink;
+}
+.no {
+  background: white;
+}
+
+/* Dog */
+#dog {
+  font-size: 40px;
+  margin-top: 15px;
+  transition: 0.5s;
+}
+
+/* Flower rain */
+.flowerRain {
+  position: absolute;
+  font-size: 20px;
+  animation: fall 4s linear forwards;
+}
+@keyframes fall {
+  to { transform: translateY(600px); opacity: 0; }
+}
+
+/* Particles */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: pink;
+  border-radius: 50%;
+}
+</style>
+</head>
+
+<body onclick="magicBurst(event)">
+
+<div class="sparkles"></div>
+
+<div class="container">
+  <div class="flower">
+    <div class="petal p1"></div>
+    <div class="petal p2"></div>
+    <div class="petal p3"></div>
+    <div class="petal p4"></div>
+    <div class="petal p5"></div>
+    <div class="center-dot"></div>
+  </div>
+
+  <div class="name">Nitika</div>
+  <div class="question">You might fall for me? 💖</div>
+
+  <div class="buttons">
+    <button class="yes" onclick="sayYes()">Yes 💕</button>
+    <button class="no" onmouseover="moveNo(this)">No 🙈</button>
+  </div>
+
+  <div id="dog">🐶</div>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function moveNo(btn) {
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 50);
+
+  btn.style.position = "absolute";
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+
+  document.getElementById("dog").textContent = "🐶💧";
+}
+
+function sayYes() {
+  let music = document.getElementById("bgMusic");
+  music.play();
+
+  let dog = document.getElementById("dog");
+  dog.textContent = "🐶🌸";
+  dog.style.transform = "scale(1.5)";
+
+  document.body.style.background =
+    "linear-gradient(270deg, #ff9a9e, #fad0c4, #ffdde1)";
+
+  for(let i=0;i<50;i++){
+    let f = document.createElement("div");
+    f.className = "flowerRain";
+    f.innerHTML = "🌸";
+    document.body.appendChild(f);
+
+    f.style.left = Math.random()*window.innerWidth + "px";
+    f.style.top = "-20px";
+
+    setTimeout(()=>f.remove(),4000);
+  }
+}
+
+function magicBurst(e) {
+  for(let i=0;i<20;i++){
+    let p = document.createElement("div");
+    p.className = "particle";
+    document.body.appendChild(p);
+
+    p.style.left = e.clientX + "px";
+    p.style.top = e.clientY + "px";
+
+    let dx = (Math.random()-0.5)*200;
+    let dy = (Math.random()-0.5)*200;
+
+    p.animate([
+      {transform:"translate(0,0)", opacity:1},
+      {transform:`translate(${dx}px,${dy}px)`, opacity:0}
+    ],{duration:1000});
+
+    setTimeout(()=>p.remove(),1000);
+  }
+}
+</script>
+
+</body>
+</html>
